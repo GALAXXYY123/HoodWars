@@ -1,11 +1,10 @@
-{ function init() { const cards = Array.from(document.querySelectorAll('.char-card')); const gameBtn = document.getElementById('gameBtn'); if (!cards.length || !gameBtn) return;
+(() => { function init() { const cards = Array.from(document.querySelectorAll('.charcard')); const gameBtn = document.getElementById('gameBtn'); if (!cards.length || !gameBtn) return;
 let selectedId = null;
 
 function updateButton() {
   const enabled = !!selectedId;
   gameBtn.disabled = !enabled;
-  gameBtn.classList.toggle('btn--disabled', !enabled);
-  gameBtn.classList.toggle('btndisabled', !enabled); // на случай старого класса
+  gameBtn.classList.toggle('btndisabled', !enabled);
 }
 
 function select(btn, persist) {
@@ -19,7 +18,7 @@ function select(btn, persist) {
   updateButton();
 }
 
-// Восстановить выбор из localStorage
+// Восстановить выбор
 let saved = null;
 try { saved = localStorage.getItem('selectedCharacter'); } catch {}
 if (saved) {
@@ -28,20 +27,20 @@ if (saved) {
 }
 updateButton();
 
-// Только клики (мобайл/вебвью Telegram)
+// Клики (мобайл/Telegram)
 cards.forEach(btn => {
   btn.addEventListener('click', () => select(btn, true));
 });
 
-// Кнопка GAME
+// GAME
 gameBtn.addEventListener('click', () => {
   if (!selectedId) return;
   alert(`Стартуем с персонажем: ${labelById(selectedId)}\nИгровая сцена будет подключена на следующем шаге`);
   // window.location.href = './game.html';
 });
 
-// Фолбэк, если иконка не загрузилась
-document.querySelectorAll('.char-card__img').forEach(img => {
+// Фолбэк, если картинка не загрузилась
+document.querySelectorAll('.charcardimg').forEach(img => {
   img.addEventListener('error', () => {
     img.style.display = 'none';
     const fallback = document.createElement('div');
@@ -51,7 +50,7 @@ document.querySelectorAll('.char-card__img').forEach(img => {
     fallback.style.border = '2px dashed rgba(255,255,255,.35)';
     fallback.style.borderRadius = '6px';
     fallback.setAttribute('aria-hidden', 'true');
-    if (img.parentElement) img.parentElement.prepend(fallback);
+    img.parentElement?.prepend(fallback);
   }, { once: true });
 });
 
@@ -66,7 +65,7 @@ function labelById(id) {
   }
 }
 
-// Опционально для Telegram Mini App:
+// Telegram Mini App: мягкое расширение
 try { window.Telegram?.WebApp?.expand?.(); } catch {}
 }
 if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', init, { once: true }); } else { init(); } })();
