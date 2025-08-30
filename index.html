@@ -1,69 +1,48 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>HoodWars — Меню</title>
-  <meta name="theme-color" content="#221c35" />
-  <link rel="preload" as="image" href="./assets/backgrounds/menu_bg.png">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=7" />
+  <meta charset="UTF-8">
+  <title>Beat'em up 16-bit</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="styles.css" rel="stylesheet">
 </head>
 <body>
-  <div class="app">
+  <div id="app" class="app">
     <div class="menu">
-      <img src="./assets/backgrounds/menu_bg.png" alt="" class="menu__bg" aria-hidden="true" />
+      <!-- фон -->
+      <img src="bg.jpg" alt="" class="menubg">
 
-      <section class="menu__grid" aria-label="Персонажи">
-        <button class="char-card" data-id="gsam" aria-pressed="false" type="button">
-          <img src="./assets/icons/gsam.png" alt="G.SAM" class="char-card__img" />
-          <span class="Исправил пути, регистр и опечатки (icons без префикса char_, script: main.js, контейнер .app, заголовок и theme-color под фон). Готовый index.html:
+      <!-- заголовок -->
+      <h1 class="menu__title">Beat’em up 16-bit</h1>
+      <h2 class="menu__subtitle">Выбери персонажа</h2>
 
-<!doctype html>
-<html lang="ru">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>HoodWars — Меню</title>
-  <meta name="theme-color" content="#0f0b20" />
-  <link rel="preload" as="image" href="./assets/backgrounds/menu_bg.png?v=2">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css?v=8" />
-</head>
-<body>
-  <div class="app">
-    <div class="menu">
-      <img src="./assets/backgrounds/menu_bg.png?v=2" alt="" class="menu__bg" aria-hidden="true" />
+      <!-- грид персонажей -->
+      <div class="menugrid">
+        <button class="charcard" data-id="gsam" aria-pressed="false">
+          <img src="chars/gsam.png" alt="" class="charcardimg">
+          <span class="charcardname">G.SAM</span>
+        </button>
+        <button class="charcard" data-id="dyadyajenya" aria-pressed="false">
+          <img src="chars/dyadya.png" alt="" class="charcardimg">
+          <span class="charcardname">ДЯДЯ ЖЕНЯ</span>
+        </button>
+        <button class="charcard" data-id="gofman" aria-pressed="false">
+          <img src="chars/gofman.png" alt="" class="charcardimg">
+          <span class="charcardname">Гофман</span>
+        </button>
+        <button class="charcard" data-id="polyana" aria-pressed="false">
+          <img src="chars/polyana.png" alt="" class="charcardimg">
+          <span class="charcardname">Polyana</span>
+        </button>
+      </div>
 
-      <section class="menu__grid" aria-label="Персонажи">
-        <button class="char-card" data-id="gsam" aria-pressed="false">
-          <img src="./assets/icons/gsam.png" alt="G.SAM" class="char-card__img" />
-          <span class="char-card__name">G.SAM</span>
-        </button>
-        <button class="char-card" data-id="dyadya-jenya" aria-pressed="false">
-          <img src="./assets/icons/dyadya_jenya.png" alt="ДЯДЯ ЖЕНЯ" class="char-card__img" />
-          <span class="char-card__name">ДЯДЯ ЖЕНЯ</span>
-        </button>
-        <button class="char-card" data-id="gofman" aria-pressed="false">
-          <img src="./assets/icons/gofman.png" alt="Гриша Гофман" class="char-card__img" />
-          <span class="char-card__name">Гриша Гофман</span>
-        </button>
-        <button class="char-card" data-id="polyana" aria-pressed="false">
-          <img src="./assets/icons/polyana.png" alt="Polyana" class="char-card__img" />
-          <span class="char-card__name">Polyana</span>
-        </button>
-      </section>
-
-      <footer class="menu__footer">
-        <button id="gameBtn" class="btn btn--game" disabled>GAME</button>
-      </footer>
+      <!-- футер -->
+      <div class="menufooter">
+        <button id="gameBtn" class="btn btndisabled" disabled>GAME</button>
+      </div>
     </div>
   </div>
 
-  <script src="./main.js?v=8"></script>
+  <script src="main.js"></script>
 </body>
 </html>
