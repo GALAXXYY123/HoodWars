@@ -1,13 +1,121 @@
-/ База / , ::before, *::after { box-sizing: border-box; } html, body { height: 100%; } body { margin: 0; background: #0f0b20; color: #fff; font-family: "Press Start 2P", system-ui, sans-serif; display: grid; place-items: center; }
-/ Контейнер приложения: поддержка и id="app", и class="app" /
-app, .app {
-width: 100%; height: 100%; display: grid; place-items: center; padding: 12px; }
-/ Карточка меню / .menu { position: relative; width: min(100vw, 420px); aspect-ratio: 9 / 16; overflow: hidden; }
-/ Фон: contain, якорь сверху по центру, «поля» фоном / .menubg { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center top; image-rendering: pixelated; z-index: 0; background: #0f0b20; }
-/ Сетка персонажей поверх фона / .menugrid { position: relative; z-index: 2; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 16px; margin-top: 18px; }
-/ Карточка персонажа / .charcard { appearance: none; -webkit-appearance: none; background: rgba(0,0,0,0.25); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 10px 6px 8px; color: #fff; text-align: center; cursor: pointer; transition: transform .12s ease, border-color .12s ease, background .12s ease; overflow: hidden; } .charcard:hover { transform: translateY(-2px); } .charcard[aria-pressed="true"] { border-color: #ffd54a; background: rgba(255,213,74,0.15); }
-/ Иконки в 2 раза меньше за счёт масштаба (как в вашем ТЗ) / .charcardimg { width: 128px; height: 128px; image-rendering: pixelated; transform: scale(.5); transform-origin: center; display: block; margin: 0 auto 6px; }
-/ Подпись / .charcardname { display: block; font-size: 10px; line-height: 12px; letter-spacing: .5px; text-shadow: 0 1px 0 rgba(0,0,0,.7); }
-/ Кнопка GAME — чуть выше низа / .menufooter { position: absolute; left: 0; right: 0; bottom: 24px; display: flex; justify-content: center; z-index: 2; }
-.btn { font: inherit; padding: 12px 22px; border-radius: 12px; border: 2px solid #fff; background: #6c5ce7; color: #fff; cursor: pointer; transition: transform .1s ease, opacity .2s ease, background .2s ease, border-color .2s ease; } .btn:hover { transform: translateY(-1px); } .btn.btndisabled, .btn:disabled { opacity: .55; cursor: not-allowed; filter: grayscale(.2); }
-/ Адаптация для очень маленьких экранов / @media (max-width: 360px) { .menu { width: 100vw; } .menugrid { gap: 10px; padding: 12px; } .charcardimg { width: 110px; height: 110px; } }
+*, *::before, *::after { box-sizing: border-box; }
+html, body { height: 100%; }
+body {
+  margin: 0;
+  background: #0f0b20;
+  color: #fff;
+  font-family: "Press Start 2P", system-ui, sans-serif;
+  display: grid;
+  place-items: center;
+}
+
+.app {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  place-items: center;
+  padding: 12px;
+}
+
+.menu {
+  position: relative;
+  width: min(100vw, 420px);
+  aspect-ratio: 9 / 16;
+  overflow: hidden;
+}
+
+.menubg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: center top;
+  image-rendering: pixelated;
+  background: #0f0b20;
+  z-index: 0;
+}
+
+.menu__title, .menu__subtitle {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  margin: 8px 0 0;
+}
+.menu__title { font-size: 12px; }
+.menu__subtitle { font-size: 10px; font-weight: normal; }
+
+.menugrid {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  padding: 16px;
+  margin-top: 18px;
+}
+
+.charcard {
+  appearance: none;
+  background: rgba(0,0,0,0.25);
+  border: 2px solid rgba(255,255,255,0.25);
+  border-radius: 10px;
+  padding: 10px 6px 8px;
+  color: #fff;
+  text-align: center;
+  cursor: pointer;
+  transition: transform .12s ease, border-color .12s ease, background .12s ease;
+}
+.charcard:hover { transform: translateY(-2px); }
+.charcard[aria-pressed="true"] {
+  border-color: #ffd54a;
+  background: rgba(255,213,74,0.15);
+}
+
+.charcardimg {
+  width: 128px;
+  height: 128px;
+  image-rendering: pixelated;
+  transform: scale(.5);
+  transform-origin: center;
+  display: block;
+  margin: 0 auto 6px;
+}
+
+.charcardname {
+  display: block;
+  font-size: 10px;
+  line-height: 12px;
+  letter-spacing: .5px;
+  text-shadow: 0 1px 0 rgba(0,0,0,.7);
+}
+
+.menufooter {
+  position: absolute;
+  left: 0; right: 0; bottom: 24px;
+  display: flex;
+  justify-content: center;
+  z-index: 2;
+}
+
+.btn {
+  font: inherit;
+  padding: 12px 22px;
+  border-radius: 12px;
+  border: 2px solid #fff;
+  background: #6c5ce7;
+  color: #fff;
+  cursor: pointer;
+  transition: transform .1s ease, opacity .2s ease, background .2s ease, border-color .2s ease;
+}
+.btn:hover { transform: translateY(-1px); }
+.btndisabled, .btn:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+  filter: grayscale(.2);
+}
+
+@media (max-width: 360px) {
+  .menugrid { gap: 10px; padding: 12px; }
+  .charcardimg { width: 110px; height: 110px; }
+}
