@@ -1,66 +1,45 @@
-(function(){
-  const cards = Array.from(document.querySelectorAll('.char-card'));
-  const gameBtn = document.getElementById('gameBtn');
+'use strict';
+document.addEventListener('DOMContentLoaded', () => { const cards = Array.from(document.querySelectorAll('.char-card')); const gameBtn = document.getElementById('gameBtn'); let selectedId = null;
+function enableGame(state) { if (!gameBtn) return; gameBtn.disabled = !state; gameBtn.classList.toggle('btn--disabled', !state); }
+function selectCard(card, save = true) { if (!card) return; cards.forEach(c => c.setAttribute('aria-pressed', c === card ? 'true' : 'false')); selectedId = card.dataset.id || null;
+const nameEl = card.querySelector('.char-card__name');
+const name = nameEl ? nameEl.textContent.trim() : '';
 
-  let selectedId = null;
+if (save && selectedId) {
+  localStorage.setItem('selectedCharacterId', selectedId);
+  localStorage.setItem('selectedCharacterName', name);
+}
+enableGame(!!selectedId);
+}
+function restoreSelection() { const savedId = localStorage.getItem('selectedCharacterId'); if (!savedId) return; const card = cards.find(c => c.dataset.id === savedId); if (card) selectCard(card, false); }
+// Click and keyboard activate cards.forEach(card => { card.setAttribute('tabindex', '0'); card.addEventListener('click', () => selectCard(card)); card.addEventListener('keydown', e => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); selectCard(card); } }); });
+// Arrow-key navigation within the 2x2 grid document.addEventListener('keydown', e => { const active = document.activeElement; if (!active || !active.classList.contains('char-card')) return;
+const idx = cards.indexOf(active);
+if (idx < 0) return;
 
-  // Восстановить выбор из localStorage
-  const saved = localStorage.getItem('selectedCharacter');
-  if (saved) {
-    const btn = cards.find(b => b.dataset.id === saved);
-    if (btn) select(btn, false);
-  }
+const cols = 2;
+let nextIdx = idx;
 
-  // Навесить обработчики выбора персонажа
-  cards.forEach(btn => {
-    btn.addEventListener('click', () => select(btn, true), {passive:true});
-  });
+switch (e.key) {
+  case 'ArrowRight': nextIdx = Math.min(cards.length - 1, idx + 1); break;
+  case 'ArrowLeft':  nextIdx = Math.max(0, idx - 1); break;
+  case 'ArrowDown':  nextIdx = Math.min(cards.length - 1, idx + cols); break;
+  case 'ArrowUp':    nextIdx = Math.max(0, idx - cols); break;
+  default: return;
+}
+e.preventDefault();
+cards[nextIdx]?.focus();
+});
+// GAME button behavior if (gameBtn) { gameBtn.addEventListener('click', () => { if (!selectedId) return;
+  const name = localStorage.getItem('selectedCharacterName') || '';
+  // Dispatch a custom event for integration with the game
+  window.dispatchEvent(new CustomEvent('start-game', {
+    detail: { id: selectedId, name }
+  }));
 
-  // Обработчик кнопки GAME
-  gameBtn.addEventListener('click', () => {
-    if (!selectedId) return;
-    // На этом шаге только меню. Позже переведем на игру (game.html).
-    alert(`Стартуем с персонажем: ${labelById(selectedId)}.\nИгровая сцена будет подключена на следующем шаге.`);
-    // Пример будущей навигации:
-    // window.location.href = './game.html';
-  });
+  // Example navigation (uncomment if you have a game page):
+  // location.href = './game.html';
+});
+}
+// Init enableGame(false); restoreSelection(); });
 
-  function select(btn, persist){
-    // Сбросить состояние других карточек
-    cards.forEach(b => b.setAttribute('aria-pressed', 'false'));
-    btn.setAttribute('aria-pressed', 'true');
-    selectedId = btn.dataset.id;
-
-    // Активировать кнопку GAME
-    gameBtn.disabled = false;
-    gameBtn.classList.remove('btn--disabled');
-
-    if (persist) {
-      localStorage.setItem('selectedCharacter', selectedId);
-    }
-  }
-
-  function labelById(id){
-    switch(id){
-      case 'gsam': return 'G.SAM';
-      case 'dyadya-jenya': return 'ДЯДЯ ЖЕНЯ';
-      case 'gofman': return 'Гофман';
-      case 'polyana': return 'Polyana';
-      default: return id;
-    }
-  }
-
-  // Простейшая проверка ассетов: если картинка не грузится — затемним карточку
-  document.querySelectorAll('.char-card__img').forEach(img=>{
-    img.addEventListener('error', ()=>{
-      img.style.display='none';
-      const fallback = document.createElement('div');
-      fallback.style.width='100%';
-      fallback.style.aspectRatio='1/1';
-      fallback.style.background='repeating-linear-gradient(45deg, #5b4b88, #5b4b88 8px, #3a2f59 8px, #3a2f59 16px)';
-      fallback.style.border='2px dashed rgba(255,255,255,.35)';
-      fallback.style.borderRadius='6px';
-      img.parentElement.prepend(fallback);
-    }, {once:true});
-  });
-})();
