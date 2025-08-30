@@ -44,7 +44,7 @@
     switch(id){
       case 'gsam': return 'G.SAM';
       case 'dyadya-jenya': return 'ДЯДЯ ЖЕНЯ';
-      case 'gofman': return 'Гофман';
+      case 'gofman': return 'Гриша Гофман';
       case 'polyana': return 'Polyana';
       default: return id;
     }
@@ -64,4 +64,3 @@
     }, {once:true});
   });
 })();
-
