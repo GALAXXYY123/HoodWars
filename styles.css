@@ -1,116 +1,18 @@
-:root{
-  --bg-dark: #1a1430;
-  --bg-overlay: rgba(0,0,0,0.25);
-  --text: #ffffff;
-  --accent: #ff8f2b;
-  --accent-2: #b37cff;
-  --disabled: #7a6f9a;
-}
-
-*{box-sizing:border-box}
-html,body,#app{height:100%}
-html,body{margin:0;background:var(--bg-dark);color:var(--text);font-family:"Press Start 2P", system-ui, sans-serif}
-
-img{display:block;max-width:100%}
-button{font:inherit;cursor:pointer}
-button:disabled{cursor:not-allowed;filter:grayscale(1)}
-
-.game-wrapper{
-  position:fixed; inset:0;
-  display:grid; place-items:center;
-  background: #140f26;
-}
-
-/* Экран 9:16 с letterbox */
-.menu{
-  position:relative;
-  width:min(100vw, 56.25vh); /* ширина под 9:16 */
-  height:min(177.78vw, 100vh); /* высота под 9:16 */
-  aspect-ratio: 9 / 16;
-  overflow:hidden;
-  border-radius: 12px;
-  box-shadow: 0 10px 40px rgba(0,0,0,.5);
-  background:
-    linear-gradient(var(--bg-overlay), var(--bg-overlay)),
-    url("./assets/backgrounds/menu_bg.png") center/cover no-repeat;
-  image-rendering: pixelated;
-}
-
-/* Внутренние отступы и компоновка */
-.menu__header{padding:16px 16px 8px;text-align:center;text-shadow:0 2px 0 #000}
-.menu__title{margin:0;font-size:16px;letter-spacing:1px;color:#ffd39f}
-.menu__subtitle{margin:6px 0 0;font-size:10px;color:#e6dcff}
-
-.menu__grid{
-  display:grid;
-  grid-template-columns: 1fr 1fr;
-  gap:12px;
-  padding:12px 16px;
-  margin-top:6px;
-}
-
-/* Карточка персонажа 2×2 */
-.char-card{
-  position:relative;
-  background: rgba(10,8,22,.6);
-  border:2px solid #43386a;
-  border-radius:10px;
-  padding:10px 8px 8px;
-  display:flex; flex-direction:column; align-items:center; gap:8px;
-  transition: transform .08s ease, border-color .08s ease, box-shadow .08s ease;
-  color:#fff;
-}
-.char-card:active{transform:translateY(1px)}
-.char-card[aria-pressed="true"]{
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px rgba(255,143,43,.25) inset;
-}
-.char-card__img{
-  width:100%;
-  aspect-ratio:1/1;
-  object-fit:contain;
-  image-rendering: pixelated;
-  filter: drop-shadow(0 2px 0 #000);
-}
-.char-card__name{
-  font-size:10px; line-height:1; text-align:center;
-  color:#ffe2c2; text-shadow:0 1px 0 #000;
-}
-
-/* Подвал с кнопкой GAME */
-.menu__footer{
-  position:absolute; left:0; right:0; bottom:12px;
-  display:flex; justify-content:center; padding:0 16px;
-}
-.btn{
-  min-width: 60%;
-  padding:14px 18px;
-  border:0; border-radius:12px;
-  font-size:14px; letter-spacing:2px;
-  color:#120d1e; text-shadow:0 1px 0 rgba(255,255,255,.35);
-  background: linear-gradient(180deg, #ffd89b 0%, #ff8f2b 100%);
-  box-shadow:
-    0 6px 0 #a05512,
-    0 10px 16px rgba(0,0,0,.35);
-  transition: transform .08s ease, filter .08s ease, opacity .08s ease;
-}
-.btn:active{transform:translateY(2px)}
-.btn--disabled{
-  background: linear-gradient(180deg, #9a90b3 0%, #6b6285 100%);
-  box-shadow:
-    0 6px 0 #3b3550,
-    0 10px 16px rgba(0,0,0,.25);
-  color:#1f1a30; opacity:.85;
-}
-
-/* Малые устройства — плотнее отступы */
-@media (max-width:360px){
-  .menu__title{font-size:14px}
-  .char-card__name{font-size:9px}
-  .btn{min-width:70%; font-size:13px; padding:12px 14px}
-}
-
-/* Безопасная зона для вырезов */
-@supports (padding: max(0px)){
-  .menu{ padding-bottom: max(0px, env(safe-area-inset-bottom)); }
-}
+:root{ --bg-dark: #1a1430; --bg-overlay: rgba(0,0,0,0.25); --text: #ffffff; --accent: #ff8f2b; --accent-2: #b37cff; --disabled: #7a6f9a; }
+*{box-sizing:border-box} html,body,#app{height:100%} html,body{margin:0;background:var(--bg-dark);color:var(--text);font-family:"Press Start 2P", system-ui, sans-serif}
+img{display:block;max-width:100%} button{font:inherit;cursor:pointer} button:disabled{cursor:not-allowed;filter:grayscale(1)}
+.game-wrapper{ position:fixed; inset:0; display:grid; place-items:center; background: #140f26; }
+/ Экран 9:16 с letterbox / .menu{ position:relative; width:min(100vw, 56.25vh); height:min(177.78vw, 100vh); aspect-ratio: 9 / 16; overflow:hidden; border-radius: 12px; box-shadow: 0 10px 40px rgba(0,0,0,.5); background: linear-gradient(var(--bg-overlay), var(--bg-overlay)), url("./assets/backgrounds/menu_bg.png") center/cover no-repeat; image-rendering: pixelated; }
+/ Сетка персонажей — сжата до 50% ширины экрана игры / .menu__grid{ display:grid; grid-template-columns: 1fr 1fr; gap:10px; padding:8px 0; width:50%; margin: 8px auto 0; }
+/ Карточки уменьшены / .char-card{ position:relative; background: rgba(10,8,22,.6); border:2px solid #43386a; border-radius:10px; padding:8px 6px 6px; display:flex; flex-direction:column; align-items:center; gap:6px; transition: transform .08s ease, border-color .08s ease, box-shadow .08s ease; color:#fff; } .char-card:active{transform:translateY(1px)} .char-card[aria-pressed="true"]{ border-color: var(--accent); box-shadow: 0 0 0 3px rgba(255,143,43,.25) inset; } .char-cardimg{ width:100%; aspect-ratio:1/1; object-fit:contain; image-rendering: pixelated; filter: drop-shadow(0 2px 0 #000); } .char-cardname{ font-size:9px; line-height:1; text-align:center; color:#ffe2c2; text-shadow:0 1px 0 #000; }
+/ Подвал с кнопкой GAME — поднят выше / .menu__footer{ position:absolute; left:0; right:0; bottom:56px; display:flex; justify-content:center; padding:0 16px; } .btn{ min-width: 60%; padding:14px 18px; border:0; border-radius:12px; font-size:14px; letter-spacing:2px; color:#120d1e; text-shadow:0 1px 0 rgba(255,255,255,.35); background: linear-gradient(180deg, #ffd89b 0%, #ff8f2b 100%); box-shadow: 0 6px 0 #a05512, 0 10px 16px rgba(0,0,0,.35); transition: transform .08s ease, filter .08s ease, opacity .08s ease; } .btn:active{transform:translateY(2px)} .btn--disabled{ background: linear-gradient(180deg, #9a90b3 0%, #6b6285 100%); box-shadow: 0 6px 0 #3b3550, 0 10px 16px rgba(0,0,0,.25); color:#1f1a30; opacity:.85; }
+@media (max-width:360px){ .char-card__name{font-size:8px} .btn{min-width:70%; font-size:13px; padding:12px 14px} }
+@supports (padding: max(0px)){ .menu{ padding-bottom: max(0px, env(safe-area-inset-bottom)); } }
+main.js (только усилил диагностику ошибок загрузки) (function(){ const cards = Array.from(document.querySelectorAll('.char-card')); const gameBtn = document.getElementById('gameBtn');
+let selectedId = null;
+const saved = localStorage.getItem('selectedCharacter'); if (saved) { const btn = cards.find(b => b.dataset.id === saved); if (btn) select(btn, false); }
+cards.forEach(btn => { btn.addEventListener('click', () => select(btn, true), {passive:true}); });
+gameBtn.addEventListener('click', () => { if (!selectedId) return; alert(Стартуем с персонажем: ${labelById(selectedId)}.\nИгровая сцена будет подключена на следующем шаге.); });
+function select(btn, persist){ cards.forEach(b => b.setAttribute('aria-pressed', 'false')); btn.setAttribute('aria-pressed', 'true'); selectedId = btn.dataset.id; gameBtn.disabled = false; gameBtn.classList.remove('btn--disabled'); if (persist) localStorage.setItem('selectedCharacter', selectedId); }
+function labelById(id){ switch(id){ case 'gsam': return 'G.SAM'; case 'dyadya-jenya': return 'ДЯДЯ ЖЕНЯ'; case 'gofman': return 'Гофман'; case 'polyana': return 'Polyana'; default: return id; } }
+document.querySelectorAll('.char-card__img').forEach(img=>{ img.addEventListener('error', ()=>{ console.warn('Не загрузилось изображение:', img.getAttribute('src')); img.style.display='none'; const fallback = document.createElement('div'); fallback.style.width='100%'; fallback.style.aspectRatio='1/1'; fallback.style.background='repeating-linear-gradient(45deg, #5b4b88, #5b4b88 8px, #3a2f59 8px, #3a2f59 16px)'; fallback.style.border='2px dashed rgba(255,255,255,.35)'; fallback.style.borderRadius='6px'; img.parentElement.prepend(fallback); }, {once:true}); }); })();
