@@ -8,13 +8,14 @@
   <link rel="preload" as="image" href="./assets/backgrounds/menu_bg.png">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./style.css" />
+  <link rel="stylesheet" href="./style.css?v=6" />
 </head>
 <body>
   <div id="app">
     <div class="game-wrapper">
       <div class="menu">
-        
+        <img src="./assets/backgrounds/menu_bg.png" alt="" class="menu__bg" aria-hidden="true" />
+
         <section class="menu__grid" aria-label="Персонажи">
           <button class="char-card" data-id="gsam" aria-pressed="false">
             <img src="./assets/icons/char_gsam.png" alt="G.SAM" class="char-card__img" />
@@ -41,6 +42,6 @@
     </div>
   </div>
 
-  <script src="./mein.js"></script>
+  <script src="./mein.js?v=3"></script>
 </body>
 </html>
