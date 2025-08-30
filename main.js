@@ -10,6 +10,7 @@
       const enabled = !!selectedId;
       gameBtn.disabled = !enabled;
       gameBtn.classList.toggle('btndisabled', !enabled);
+      gameBtn.classList.toggle('active', enabled); // жёлтая подсветка
     }
 
     function select(btn, persist) {
@@ -38,21 +39,6 @@
     gameBtn.addEventListener('click', () => {
       if (!selectedId) return;
       alert(`Стартуем с персонажем: ${labelById(selectedId)}`);
-      // window.location.href = './game.html';
-    });
-
-    document.querySelectorAll('.charcardimg').forEach(img => {
-      img.addEventListener('error', () => {
-        img.style.display = 'none';
-        const fallback = document.createElement('div');
-        fallback.style.width = '100%';
-        fallback.style.aspectRatio = '1 / 1';
-        fallback.style.background = 'repeating-linear-gradient(45deg, #5b4b88, #5b4b88 8px, #3a2f59 8px, #3a2f59 16px)';
-        fallback.style.border = '2px dashed rgba(255,255,255,.35)';
-        fallback.style.borderRadius = '6px';
-        fallback.setAttribute('aria-hidden', 'true');
-        img.parentElement?.prepend(fallback);
-      }, { once: true });
     });
 
     function labelById(id) {
@@ -64,8 +50,6 @@
         default: return id;
       }
     }
-
-    try { window.Telegram?.WebApp?.expand?.(); } catch {}
   }
 
   if (document.readyState === 'loading') {
