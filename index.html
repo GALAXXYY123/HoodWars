@@ -5,36 +5,29 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
   <title>Beat’em up 16-bit — Меню</title>
   <meta name="theme-color" content="#221c35" />
+  <link rel="preload" as="image" href="./assets/backgrounds/menu_bg.png">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css" />
+  <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
   <div id="app">
     <div class="game-wrapper">
       <div class="menu">
-        <header class="menu__header">
-          <h1 class="menu__title">Beat’em up 16-bit</h1>
-          <p class="menu__subtitle">Выбери персонажа</p>
-        </header>
-
+        <img src="./assets/backgrounds/menu_bg.png" alt="" class="menu__bg" aria-hidden="true" />
         <section class="menu__grid" aria-label="Персонажи">
-          <!-- Карточки персонажей -->
           <button class="char-card" data-id="gsam" aria-pressed="false">
             <img src="./assets/icons/char_gsam.png" alt="G.SAM" class="char-card__img" />
             <span class="char-card__name">G.SAM</span>
           </button>
-
           <button class="char-card" data-id="dyadya-jenya" aria-pressed="false">
             <img src="./assets/icons/char_dyadya_jenya.png" alt="ДЯДЯ ЖЕНЯ" class="char-card__img" />
             <span class="char-card__name">ДЯДЯ ЖЕНЯ</span>
           </button>
-
           <button class="char-card" data-id="gofman" aria-pressed="false">
-            <img src="./assets/icons/char_gofman.png" alt="Гофман" class="char-card__img" />
-            <span class="char-card__name">Гофман</span>
+            <img src="./assets/icons/char_gofman.png" alt="Гриша Гофман" class="char-card__img" />
+            <span class="char-card__name">Гриша Гофман</span>
           </button>
-
           <button class="char-card" data-id="polyana" aria-pressed="false">
             <img src="./assets/icons/char_polyana.png" alt="Polyana" class="char-card__img" />
             <span class="char-card__name">Polyana</span>
@@ -42,14 +35,12 @@
         </section>
 
         <footer class="menu__footer">
-          <button id="gameBtn" class="btn btn--game btn--disabled" disabled>
-            GAME
-          </button>
+          <button id="gameBtn" class="btn btn--game btn--disabled" disabled>GAME</button>
         </footer>
       </div>
     </div>
   </div>
 
-  <script src="./main.js"></script>
+  <script src="./mein.js"></script>
 </body>
 </html>
