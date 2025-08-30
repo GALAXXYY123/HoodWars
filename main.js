@@ -22,7 +22,6 @@
       updateButton();
     }
 
-    // восстановление
     try {
       const saved = localStorage.getItem('selectedCharacter');
       if (saved) {
@@ -32,19 +31,16 @@
     } catch {}
     updateButton();
 
-    // клики
     cards.forEach(btn => {
       btn.addEventListener('click', () => select(btn, true));
     });
 
-    // кнопка GAME
     gameBtn.addEventListener('click', () => {
       if (!selectedId) return;
-      alert(`Стартуем с персонажем: ${labelById(selectedId)}\n(игровая сцена подключится на следующем шаге)`);
+      alert(`Стартуем с персонажем: ${labelById(selectedId)}`);
       // window.location.href = './game.html';
     });
 
-    // если картинка не загрузилась
     document.querySelectorAll('.charcardimg').forEach(img => {
       img.addEventListener('error', () => {
         img.style.display = 'none';
