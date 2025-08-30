@@ -49,7 +49,7 @@ body {
   background: rgba(0,0,0,0.25);
   border: 2px solid rgba(255,255,255,0.25);
   border-radius: 10px;
-  padding: 10px 6px 8px;
+  padding: 6px;
   color: #fff;
   text-align: center;
   cursor: pointer;
@@ -61,21 +61,19 @@ body {
   background: rgba(255,213,74,0.15);
 }
 
+/* уменьшенные картинки */
 .charcardimg {
-  width: 128px;
-  height: 128px;
+  width: 64px;
+  height: 64px;
   image-rendering: pixelated;
-  transform: scale(.5);
-  transform-origin: center;
   display: block;
   margin: 0 auto 6px;
 }
 
 .charcardname {
   display: block;
-  font-size: 10px;
-  line-height: 12px;
-  letter-spacing: .5px;
+  font-size: 8px;
+  line-height: 10px;
   text-shadow: 0 1px 0 rgba(0,0,0,.7);
 }
 
@@ -90,7 +88,7 @@ body {
 
 .btn {
   font: inherit;
-  padding: 12px 22px;
+  padding: 10px 20px;
   border-radius: 12px;
   border: 2px solid #fff;   /* белая рамка */
   background: transparent;  /* прозрачный фон */
@@ -106,6 +104,6 @@ body {
 }
 
 @media (max-width: 360px) {
-  .menugrid { gap: 10px; padding: 12px; }
-  .charcardimg { width: 110px; height: 110px; }
+  .menugrid { gap: 8px; padding: 10px; }
+  .charcardimg { width: 56px; height: 56px; }
 }
