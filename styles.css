@@ -14,13 +14,12 @@ body {
   height: 100%;
   display: grid;
   place-items: center;
-  padding: 12px;
 }
 
 .menu {
   position: relative;
-  width: min(100vw, 420px);
-  aspect-ratio: 9 / 16;
+  width: 100%;
+  height: 100%;
   overflow: hidden;
 }
 
@@ -29,22 +28,12 @@ body {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: contain;
-  object-position: center top;
+  object-fit: cover;   /* фон на весь экран */
   image-rendering: pixelated;
-  background: #0f0b20;
   z-index: 0;
 }
 
-.menu__title, .menu__subtitle {
-  position: relative;
-  z-index: 2;
-  text-align: center;
-  margin: 8px 0 0;
-}
-.menu__title { font-size: 12px; }
-.menu__subtitle { font-size: 10px; font-weight: normal; }
-
+/* грид персонажей */
 .menugrid {
   position: relative;
   z-index: 2;
@@ -52,7 +41,7 @@ body {
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
   padding: 16px;
-  margin-top: 18px;
+  margin-top: 40px;
 }
 
 .charcard {
@@ -90,6 +79,7 @@ body {
   text-shadow: 0 1px 0 rgba(0,0,0,.7);
 }
 
+/* кнопка GAME */
 .menufooter {
   position: absolute;
   left: 0; right: 0; bottom: 24px;
@@ -102,11 +92,11 @@ body {
   font: inherit;
   padding: 12px 22px;
   border-radius: 12px;
-  border: 2px solid #fff;
-  background: #6c5ce7;
+  border: 2px solid #fff;   /* белая рамка */
+  background: transparent;  /* прозрачный фон */
   color: #fff;
   cursor: pointer;
-  transition: transform .1s ease, opacity .2s ease, background .2s ease, border-color .2s ease;
+  transition: transform .1s ease, opacity .2s ease, border-color .2s ease;
 }
 .btn:hover { transform: translateY(-1px); }
 .btndisabled, .btn:disabled {
