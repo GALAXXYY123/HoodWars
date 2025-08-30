@@ -28,28 +28,28 @@ body {
   inset: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;   /* фон на весь экран */
+  object-fit: cover;
   image-rendering: pixelated;
   z-index: 0;
 }
 
-/* грид персонажей */
+/* грид */
 .menugrid {
   position: relative;
   z-index: 2;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  padding: 16px;
-  margin-top: 40px;
+  gap: 10px;
+  padding: 12px;
+  margin-top: 30%; /* смещаем вниз */
 }
 
 .charcard {
   appearance: none;
   background: rgba(0,0,0,0.25);
   border: 2px solid rgba(255,255,255,0.25);
-  border-radius: 10px;
-  padding: 6px;
+  border-radius: 8px;
+  padding: 4px;
   color: #fff;
   text-align: center;
   cursor: pointer;
@@ -61,23 +61,24 @@ body {
   background: rgba(255,213,74,0.15);
 }
 
-/* уменьшенные картинки */
+/* ещё меньше картинки */
 .charcardimg {
-  width: 64px;
-  height: 64px;
+  width: 32px;
+  height: 32px;
   image-rendering: pixelated;
   display: block;
-  margin: 0 auto 6px;
+  margin: 0 auto 4px;
 }
 
 .charcardname {
   display: block;
-  font-size: 8px;
-  line-height: 10px;
+  font-size: 6px;       /* ещё меньше */
+  line-height: 8px;
+  font-family: "Press Start 2P", system-ui, sans-serif;
   text-shadow: 0 1px 0 rgba(0,0,0,.7);
 }
 
-/* кнопка GAME */
+/* GAME */
 .menufooter {
   position: absolute;
   left: 0; right: 0; bottom: 24px;
@@ -88,13 +89,13 @@ body {
 
 .btn {
   font: inherit;
-  padding: 10px 20px;
-  border-radius: 12px;
-  border: 2px solid #fff;   /* белая рамка */
-  background: transparent;  /* прозрачный фон */
+  padding: 8px 16px;
+  border-radius: 10px;
+  border: 2px solid #fff;
+  background: transparent;
   color: #fff;
   cursor: pointer;
-  transition: transform .1s ease, opacity .2s ease, border-color .2s ease;
+  transition: transform .1s ease, opacity .2s ease, border-color .2s ease, color .2s ease;
 }
 .btn:hover { transform: translateY(-1px); }
 .btndisabled, .btn:disabled {
@@ -103,7 +104,13 @@ body {
   filter: grayscale(.2);
 }
 
+/* подсветка жёлтым */
+.btn.active {
+  border-color: #ffd54a;
+  color: #ffd54a;
+}
+
 @media (max-width: 360px) {
-  .menugrid { gap: 8px; padding: 10px; }
-  .charcardimg { width: 56px; height: 56px; }
+  .menugrid { gap: 6px; padding: 8px; }
+  .charcardimg { width: 28px; height: 28px; }
 }
