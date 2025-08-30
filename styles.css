@@ -1,21 +1,18 @@
-/ База /
-{ box-sizing: border-box; } html, body { height: 100%; } body{ margin: 0; background: #0f0b20; color: #fff; font-family: "Press Start 2P", system-ui, sans-serif; display: grid; place-items: center; }
+::before, *::after { box-sizing: border-box; } html, body { height: 100%; } body{ margin: 0; background: #0f0b20; color: #fff; font-family: "Press Start 2P", system-ui, sans-serif; display: grid; place-items: center; }
 / Контейнер приложения / .app{ width: 100%; height: 100%; display: grid; place-items: center; padding: 12px; }
 / Карточка меню / .menu{ position: relative; width: min(100vw, 420px); aspect-ratio: 9 / 16; overflow: hidden; }
-/ Фон: без растяжения, как просил (contain), якорь сверху по центру / .menu__bg{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center top; image-rendering: pixelated; z-index: 0; background: #0f0b20; / «поля» вокруг, если пропорции не совпадают / }
+/ Фон: без растяжения (contain), якорь сверху по центру / .menu__bg{ position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: center top; image-rendering: pixelated; z-index: 0; background: #0f0b20; / «поля» вокруг, если пропорции не совпадают / }
 / Сетка персонажей поверх фона / .menu__grid{ position: relative; z-index: 2; display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; padding: 16px; margin-top: 18px; }
-/ Карточка персонажа / .char-card{ appearance: none; background: rgba(0,0,0,0.25); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 10px 6px 8px; color: #fff; text-align: center; cursor: pointer; transition: transform .12s ease, border-color .12s ease, background .12s ease; }
-.char-card:hover{ transform: translateY(-2px); }
-.char-card[aria-pressed="true"]{ border-color: #ffd54a; background: rgba(255,213,74,0.15); }
+/ Карточка персонажа / .char-card{ appearance: none; -webkit-appearance: none; background: rgba(0,0,0,0.25); border: 2px solid rgba(255,255,255,0.15); border-radius: 10px; padding: 10px 6px 8px; color: #fff; text-align: center; cursor: pointer; transition: transform .12s ease, border-color .12s ease, background .12s ease; } .char-card:hover{ transform: translateY(-2px); } .char-card[aria-pressed="true"]{ border-color: #ffd54a; background: rgba(255,213,74,0.15); } .char-card:focus-visible{ outline: 2px solid #ffd54a; outline-offset: 2px; }
 / Иконки: в 2 раза меньше за счёт масштаба / .char-card__img{ width: 128px; height: 128px; image-rendering: pixelated; transform: scale(.5); transform-origin: center; display: block; margin: 0 auto 6px; }
 / Подпись / .char-card__name{ display: block; font-size: 10px; line-height: 1.2; letter-spacing: .5px; text-shadow: 0 1px 0 rgba(0,0,0,.7); }
 / Кнопка GAME — чуть выше низа / .menu__footer{ position: absolute; left: 0; right: 0; bottom: 24px; / поднял кнопку наверх на ~24px / display: flex; justify-content: center; z-index: 2; }
-.btn{ font: inherit; padding: 12px 22px; border-radius: 12px; border: 2px solid #fff; background: #6c5ce7; color: #fff; cursor: pointer; transition: transform .1s ease, opacity .2s ease, background .2s ease, border-color .2s ease; }
-.btn:hover{ transform: translateY(-1px); }
-.btn:disabled, .btn.btn--disabled{ opacity: .55; cursor: not-allowed; filter: grayscale(.2); }
+.btn{ font: inherit; padding: 12px 22px; border-radius: 12px; border: 2px solid #fff; background: #6c5ce7; color: #fff; cursor: pointer; transition: transform .1s ease, opacity .2s ease, background .2s ease, border-color .2s ease; } .btn:hover{ transform: translateY(-1px); } .btn:disabled, .btn.btn--disabled{ opacity: .55; cursor: not-allowed; filter: grayscale(.2); }
 / Небольшая адаптация для совсем маленьких экранов / @media (max-width: 360px){ .menu{ width: 100vw; } .menugrid{ gap: 10px; padding: 12px; } .char-cardimg{ width: 110px; height: 110px; } }
-3) main.js document.addEventListener('DOMContentLoaded', () => { const cards = document.querySelectorAll('.char-card'); const gameBtn = document.getElementById('gameBtn'); let selected = null;
-function updateButton() { if (selected) { gameBtn.disabled = false; gameBtn.classList.remove('btn--disabled'); } else { gameBtn.disabled = true; gameBtn.classList.add('btn--disabled'); } }
+/ Уважение к настройке «меньше анимаций» / @media (prefers-reduced-motion: reduce){ , ::before, *::after{ animation: none !important; transition: none !important; } }
+main.js document.addEventListener('DOMContentLoaded', () => { const cards = document.querySelectorAll('.char-card'); const gameBtn = document.getElementById('gameBtn'); if (!gameBtn) return;
+let selected = null;
+function updateButton() { const has = !!selected; gameBtn.disabled = !has; gameBtn.classList.toggle('btn--disabled', !has); }
 cards.forEach(card => { card.addEventListener('click', () => { if (selected === card) { // повторный клик снимает выбор card.setAttribute('aria-pressed', 'false'); selected = null; updateButton(); return; } cards.forEach(c => c.setAttribute('aria-pressed', 'false')); card.setAttribute('aria-pressed', 'true'); selected = card; updateButton(); }); });
-gameBtn.addEventListener('click', () => { if (!selected) return; const id = selected.dataset.id; localStorage.setItem('selectedCharacter', id); // сюда поставь переход в игру, если есть отдельная страница // location.href = './game.html'; console.log('Выбран персонаж:', id); });
+gameBtn.addEventListener('click', () => { if (!selected) return; const id = selected.dataset.id; try { localStorage.setItem('selectedCharacter', id); } catch (e) {} // сюда поставь переход в игру, если есть отдельная страница // location.href = './game.html'; console.log('Выбран персонаж:', id); });
 updateButton(); });
