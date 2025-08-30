@@ -1,4 +1,3 @@
-/* сетка игроков */
 .menugrid {
   position: relative;
   z-index: 2;
@@ -6,13 +5,13 @@
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
   padding: 12px;
-  margin-top: 20%;   /* оставляем чтобы опускалось до середины */
+  margin-top: 20%;   /* сетка опускается до середины */
 }
 
-/* карточки квадратные */
 .charcard {
   appearance: none;
-  aspect-ratio: 1 / 1;      /* квадрат 1:1 */
+  width: 64px;       /* квадрат строго фикс */
+  height: 64px;
   background: rgba(0,0,0,0.25);
   border: 2px solid rgba(255,255,255,0.25);
   border-radius: 8px;
@@ -21,52 +20,32 @@
   text-align: center;
   cursor: pointer;
   transition: transform .12s ease, border-color .12s ease, background .12s ease;
-}
-.charcard:hover { transform: translateY(-2px); }
-.charcard[aria-pressed="true"] {
-  border-color: #ffd54a;
-  background: rgba(255,213,74,0.15);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
-/* картинки внутри */
 .charcardimg {
-  width: 60%;                /* подстраивается под квадрат */
+  width: 80%;
   height: auto;
+  margin: 0 auto 2px;
   image-rendering: pixelated;
-  display: block;
-  margin: 0 auto 6px;
 }
 
-/* имя персонажа */
 .charcardname {
   font-family: "Press Start 2P", system-ui, sans-serif;
   font-size: 6px;
   line-height: 8px;
-  text-shadow: 0 1px 0 rgba(0,0,0,.7);
+  text-align: center;
 }
 
 /* кнопка GAME */
 .menufooter {
   position: absolute;
-  top: 50%;                 /* поднимаем на середину экрана */
   left: 0;
   right: 0;
+  bottom: 50px;   /* поднимаем на 50px от низа */
   display: flex;
   justify-content: center;
   z-index: 2;
-}
-
-.btn {
-  font: inherit;
-  padding: 8px 16px;
-  border-radius: 10px;
-  border: 2px solid #fff;
-  background: transparent;
-  color: #fff;
-  cursor: pointer;
-  transition: transform .1s ease, opacity .2s ease, border-color .2s ease, color .2s ease;
-}
-.btn.active {
-  border-color: #ffd54a;
-  color: #ffd54a;
 }
