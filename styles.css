@@ -1,51 +1,18 @@
-*, *::before, *::after { box-sizing: border-box; }
-html, body { height: 100%; }
-body {
-  margin: 0;
-  background: #0f0b20;
-  color: #fff;
-  font-family: "Press Start 2P", system-ui, sans-serif;
-  display: grid;
-  place-items: center;
-}
-
-.app {
-  width: 100%;
-  height: 100%;
-  display: grid;
-  place-items: center;
-}
-
-.menu {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-}
-
-.menubg {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  image-rendering: pixelated;
-  z-index: 0;
-}
-
-/* грид */
+/* сетка игроков */
 .menugrid {
   position: relative;
   z-index: 2;
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  gap: 12px;
   padding: 12px;
-  margin-top: 30%; /* смещаем вниз */
+  margin-top: 20%;   /* оставляем чтобы опускалось до середины */
 }
 
+/* карточки квадратные */
 .charcard {
   appearance: none;
+  aspect-ratio: 1 / 1;      /* квадрат 1:1 */
   background: rgba(0,0,0,0.25);
   border: 2px solid rgba(255,255,255,0.25);
   border-radius: 8px;
@@ -61,27 +28,29 @@ body {
   background: rgba(255,213,74,0.15);
 }
 
-/* ещё меньше картинки */
+/* картинки внутри */
 .charcardimg {
-  width: 32px;
-  height: 32px;
+  width: 60%;                /* подстраивается под квадрат */
+  height: auto;
   image-rendering: pixelated;
   display: block;
-  margin: 0 auto 4px;
+  margin: 0 auto 6px;
 }
 
+/* имя персонажа */
 .charcardname {
-  display: block;
-  font-size: 6px;       /* ещё меньше */
-  line-height: 8px;
   font-family: "Press Start 2P", system-ui, sans-serif;
+  font-size: 6px;
+  line-height: 8px;
   text-shadow: 0 1px 0 rgba(0,0,0,.7);
 }
 
-/* GAME */
+/* кнопка GAME */
 .menufooter {
   position: absolute;
-  left: 0; right: 0; bottom: 24px;
+  top: 50%;                 /* поднимаем на середину экрана */
+  left: 0;
+  right: 0;
   display: flex;
   justify-content: center;
   z-index: 2;
@@ -97,20 +66,7 @@ body {
   cursor: pointer;
   transition: transform .1s ease, opacity .2s ease, border-color .2s ease, color .2s ease;
 }
-.btn:hover { transform: translateY(-1px); }
-.btndisabled, .btn:disabled {
-  opacity: .55;
-  cursor: not-allowed;
-  filter: grayscale(.2);
-}
-
-/* подсветка жёлтым */
 .btn.active {
   border-color: #ffd54a;
   color: #ffd54a;
-}
-
-@media (max-width: 360px) {
-  .menugrid { gap: 6px; padding: 8px; }
-  .charcardimg { width: 28px; height: 28px; }
 }
