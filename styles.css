@@ -1,128 +1,116 @@
 :root{
-  --bg-dark:#1a1430;
-  --overlay:rgba(0,0,0,.25);
-  --text:#fff;
-  --accent:#ff8f2b;
+  --bg-dark: #1a1430;
+  --bg-overlay: rgba(0,0,0,0.25);
+  --text: #ffffff;
+  --accent: #ff8f2b;
+  --accent-2: #b37cff;
+  --disabled: #7a6f9a;
 }
+
 *{box-sizing:border-box}
 html,body,#app{height:100%}
-html,body{margin:0;background:#140f26;color:var(--text);font-family:"Press Start 2P",system-ui,sans-serif}
+html,body{margin:0;background:var(--bg-dark);color:var(--text);font-family:"Press Start 2P", system-ui, sans-serif}
+
 img{display:block;max-width:100%}
-button{font:inherit;cursor:pointer;background:none;border:0}
+button{font:inherit;cursor:pointer}
 button:disabled{cursor:not-allowed;filter:grayscale(1)}
 
 .game-wrapper{
   position:fixed; inset:0;
   display:grid; place-items:center;
+  background: #140f26;
 }
 
-/* Экран 9:16 с безопасной рамкой */
+/* Экран 9:16 с letterbox */
 .menu{
   position:relative;
-  width:min(100vw,56.25vh);
-  height:min(177.78vw,100vh);
-  aspect-ratio:9/16;
+  width:min(100vw, 56.25vh); /* ширина под 9:16 */
+  height:min(177.78vw, 100vh); /* высота под 9:16 */
+  aspect-ratio: 9 / 16;
   overflow:hidden;
-  border-radius:12px;
-  box-shadow:0 10px 40px rgba(0,0,0,.5);
-  background:#0f0b20;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0,0,0,.5);
+  background:
+    linear-gradient(var(--bg-overlay), var(--bg-overlay)),
+    url("./assets/backgrounds/menu_bg.png") center/cover no-repeat;
+  image-rendering: pixelated;
 }
 
-/* Фон как отдельное изображение + затемнение */
-.menu__bg{
-  position:absolute; inset:0;
-  width:100%; height:100%;
-  object-fit:cover;
-  image-rendering:pixelated;
-  filter: saturate(1) contrast(1.02);
-}
-.menu::after{
-  content:""; position:absolute; inset:0;
-  background:var(--overlay);
-  pointer-events:none;
-}
+/* Внутренние отступы и компоновка */
+.menu__header{padding:16px 16px 8px;text-align:center;text-shadow:0 2px 0 #000}
+.menu__title{margin:0;font-size:16px;letter-spacing:1px;color:#ffd39f}
+.menu__subtitle{margin:6px 0 0;font-size:10px;color:#e6dcff}
 
-/* Сетка 2×2 фиксированной ширины (уменьшено ~в 2 раза) */
 .menu__grid{
-  position:relative;
   display:grid;
   grid-template-columns: 1fr 1fr;
   gap:12px;
-  width:56%;
-  margin: 6% auto 0;
-  z-index:1;
+  padding:12px 16px;
+  margin-top:6px;
 }
 
-/* Карточка — строгий квадрат 1:1, подпись внутри (оверлей) */
+/* Карточка персонажа 2×2 */
 .char-card{
   position:relative;
-  width:100%;
-  aspect-ratio:1/1;
-  border:2px solid #43386a;
-  border-radius:12px;
-  overflow:hidden;
   background: rgba(10,8,22,.6);
-  transition:transform .08s ease, border-color .08s ease, box-shadow .08s ease;
+  border:2px solid #43386a;
+  border-radius:10px;
+  padding:10px 8px 8px;
+  display:flex; flex-direction:column; align-items:center; gap:8px;
+  transition: transform .08s ease, border-color .08s ease, box-shadow .08s ease;
   color:#fff;
 }
 .char-card:active{transform:translateY(1px)}
 .char-card[aria-pressed="true"]{
-  border-color:var(--accent);
-  box-shadow:0 0 0 3px rgba(255,143,43,.25) inset;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px rgba(255,143,43,.25) inset;
 }
-
-/* Картинка вписывается внутрь, без влияния подписи на размеры */
 .char-card__img{
-  position:absolute;
-  left:8px; right:8px; top:8px; bottom:26px;
-  width:auto; height:auto;
-  max-width:calc(100% - 16px);
-  max-height:calc(100% - 34px);
-  margin:auto;
+  width:100%;
+  aspect-ratio:1/1;
   object-fit:contain;
-  image-rendering:pixelated;
+  image-rendering: pixelated;
   filter: drop-shadow(0 2px 0 #000);
 }
-
-/* Подпись — полоска снизу одинаковой высоты */
 .char-card__name{
-  position:absolute; left:0; right:0; bottom:0;
-  height:24px;
-  display:grid; place-items:center;
-  font-size:10px; line-height:1;
-  color:#e8e7ff; text-shadow:0 1px 0 #000;
-  background:rgba(0,0,0,.35);
-  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  font-size:10px; line-height:1; text-align:center;
+  color:#ffe2c2; text-shadow:0 1px 0 #000;
 }
 
-/* Кнопка GAME — поднята выше */
+/* Подвал с кнопкой GAME */
 .menu__footer{
-  position:absolute; left:0; right:0; bottom:110px;
-  display:flex; justify-content:center; z-index:1;
+  position:absolute; left:0; right:0; bottom:12px;
+  display:flex; justify-content:center; padding:0 16px;
 }
 .btn{
-  min-width:60%;
+  min-width: 60%;
   padding:14px 18px;
-  border-radius:12px;
+  border:0; border-radius:12px;
   font-size:14px; letter-spacing:2px;
   color:#120d1e; text-shadow:0 1px 0 rgba(255,255,255,.35);
-  background: linear-gradient(180deg,#ffd89b 0%,#ff8f2b 100%);
-  box-shadow:0 6px 0 #a05512, 0 10px 16px rgba(0,0,0,.35);
-  transition:transform .08s ease, filter .08s ease, opacity .08s ease;
+  background: linear-gradient(180deg, #ffd89b 0%, #ff8f2b 100%);
+  box-shadow:
+    0 6px 0 #a05512,
+    0 10px 16px rgba(0,0,0,.35);
+  transition: transform .08s ease, filter .08s ease, opacity .08s ease;
 }
 .btn:active{transform:translateY(2px)}
 .btn--disabled{
-  background: linear-gradient(180deg,#9a90b3 0%,#6b6285 100%);
-  box-shadow:0 6px 0 #3b3550, 0 10px 16px rgba(0,0,0,.25);
+  background: linear-gradient(180deg, #9a90b3 0%, #6b6285 100%);
+  box-shadow:
+    0 6px 0 #3b3550,
+    0 10px 16px rgba(0,0,0,.25);
   color:#1f1a30; opacity:.85;
 }
 
-@media (max-width:380px){
-  .menu__grid{width:62%}
+/* Малые устройства — плотнее отступы */
+@media (max-width:360px){
+  .menu__title{font-size:14px}
   .char-card__name{font-size:9px}
   .btn{min-width:70%; font-size:13px; padding:12px 14px}
 }
 
+/* Безопасная зона для вырезов */
 @supports (padding: max(0px)){
   .menu{ padding-bottom: max(0px, env(safe-area-inset-bottom)); }
 }
