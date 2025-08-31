@@ -41,11 +41,23 @@
 
 /* кнопка GAME */
 .menufooter {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 50px;   /* поднимаем на 50px от низа */
+  position: fixed;       /* фиксируем к экрану */
+  left: 50%;
+  bottom: 50px;          /* отступ от низа */
+  transform: translateX(-50%);
   display: flex;
   justify-content: center;
-  z-index: 2;
+  z-index: 10;
 }
+.btn {
+  font-family: "Press Start 2P", system-ui, sans-serif;
+  font-size: 10px;
+  padding: 10px 18px;
+  border: 2px solid #fff;
+  border-radius: 8px;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  transition: 0.2s;
+}
+
