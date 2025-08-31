@@ -3,36 +3,27 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <title>Character Select</title>
-  <link href="styles.css?v=4" rel="stylesheet">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>HOOD WARS</title>
+  <link rel="stylesheet" href="styles.css">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
-  <main class="menu">
-    <section class="menugrid">
-      <button class="charcard" aria-pressed="false">
-        <img src="img/gsam.png" alt="G.Sam" class="charcardimg">
-        <div class="charcardname">G.Sam</div>
-      </button>
-      <button class="charcard" aria-pressed="false">
-        <img src="img/dyadyazhenya.png" alt="ДЯДЯ ЖЕНЯ" class="charcardimg">
-        <div class="charcardname">ДЯДЯ ЖЕНЯ</div>
-      </button>
-      <button class="charcard" aria-pressed="false">
-        <img src="img/grisha.png" alt="Гриша Гофман" class="charcardimg">
-        <div class="charcardname">Гриша Гофман</div>
-      </button>
-      <button class="charcard" aria-pressed="false">
-        <img src="img/polyana.png" alt="Polyana" class="charcardimg">
-        <div class="charcardname">Polyana</div>
-      </button>
-    </section>
+  <div class="menugrid">
+    <button class="charcard">
+      <div class="charcardname">G.SAM</div>
+    </button>
+    <button class="charcard">
+      <div class="charcardname">ДЯДЯ ЖЕНЯ</div>
+    </button>
+    <button class="charcard">
+      <div class="charcardname">ГРИША ГОФМАН</div>
+    </button>
+    <button class="charcard">
+      <div class="charcardname">Polyana</div>
+    </button>
+  </div>
 
-    <footer class="menufooter">
-      <button id="gameBtn" class="btn">GAME</button>
-    </footer>
-  </main>
-
-  <script src="main.js"></script>
+  <button class="btn">GAME</button>
 </body>
 </html>
