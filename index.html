@@ -1,4 +1,3 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -11,7 +10,7 @@
 <body>
   <div class="menugrid">
     <button class="charcard">
-      <div class="charcardname">G.SAM</div>
+      <div class="charcardname">G. SAM</div>
     </button>
     <button class="charcard">
       <div class="charcardname">ДЯДЯ ЖЕНЯ</div>
@@ -24,6 +23,19 @@
     </button>
   </div>
 
-  <a href="game.html" class="btn">GAME</a>
+  <a href="game.html" class="btn" id="gameBtn">GAME</a>
+
+  <script>
+    const cards = document.querySelectorAll(".charcard");
+    const gameBtn = document.getElementById("gameBtn");
+
+    cards.forEach(card => {
+      card.addEventListener("click", () => {
+        cards.forEach(c => c.classList.remove("active"));
+        card.classList.add("active");
+        gameBtn.classList.add("active");
+      });
+    });
+  </script>
 </body>
 </html>
