@@ -1,17 +1,33 @@
-.menugrid {
+/* styles.css */
+body {
+  margin: 0;
+  background: #111;
+  color: #fff;
+  font-family: "Press Start 2P", system-ui, sans-serif;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.menu {
+  width: 100%;
+  max-width: 400px;
   position: relative;
-  z-index: 2;
+}
+
+.menugrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 12px;
-  padding: 12px;
-  margin-top: 20%;   /* сетка опускается до середины */
+  justify-items: center;
+  margin-top: 20%;
 }
 
 .charcard {
   appearance: none;
-  width: 64px;       /* квадрат строго фикс */
-  height: 64px;
+  width: 72px;
+  height: 72px;
   background: rgba(0,0,0,0.25);
   border: 2px solid rgba(255,255,255,0.25);
   border-radius: 8px;
@@ -24,31 +40,35 @@
   flex-direction: column;
   justify-content: center;
 }
+.charcard:hover { transform: translateY(-2px); }
+.charcard[aria-pressed="true"] {
+  border-color: #ffd54a;
+  background: rgba(255,213,74,0.15);
+}
 
 .charcardimg {
-  width: 80%;
+  width: 70%;
   height: auto;
-  margin: 0 auto 2px;
   image-rendering: pixelated;
+  margin: 0 auto 2px;
 }
 
 .charcardname {
-  font-family: "Press Start 2P", system-ui, sans-serif;
   font-size: 6px;
   line-height: 8px;
   text-align: center;
 }
 
-/* кнопка GAME */
 .menufooter {
-  position: fixed;       /* фиксируем к экрану */
+  position: fixed;
   left: 50%;
-  bottom: 50px;          /* отступ от низа */
+  bottom: 50px;
   transform: translateX(-50%);
   display: flex;
   justify-content: center;
   z-index: 10;
 }
+
 .btn {
   font-family: "Press Start 2P", system-ui, sans-serif;
   font-size: 10px;
@@ -60,4 +80,7 @@
   cursor: pointer;
   transition: 0.2s;
 }
-
+.btn.active {
+  border-color: #ffd54a;
+  color: #ffd54a;
+}
