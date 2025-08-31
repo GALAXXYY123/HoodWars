@@ -14,15 +14,15 @@ body {
   position: relative;
 }
 
-/* Контейнер под красную область */
+/* Контейнер под красный блок */
 .menu-wrapper {
   position: absolute;
-  top: 25%;          /* поднимаем выше */
+  top: 25%;              /* сдвигаем на место красного блока */
   left: 50%;
   transform: translateX(-50%);
-  width: 80%;        /* растянем почти на всю ширину экрана */
-  max-width: 500px;  /* ограничение на больших экранах */
-  height: 50%;       /* высота как у красного прямоугольника */
+  width: 80%;
+  max-width: 500px;
+  height: 50%;            /* высота как у красного блока */
   display: flex;
   flex-direction: column;
   justify-content: space-between; /* карточки сверху, кнопка снизу */
@@ -43,13 +43,15 @@ body {
 .charcard {
   width: 100%;
   max-width: 200px;
-  aspect-ratio: 1 / 1;   /* всегда квадратные */
+  aspect-ratio: 1 / 1;          /* всегда квадрат */
   border: 2px solid rgba(255, 255, 255, 0.6);
   border-radius: 6px;
   background: rgba(20, 20, 40, 0.55);
   display: flex;
-  justify-content: center;   /* текст по центру */
-  align-items: center;       /* текст по центру */
+  flex-direction: column;
+  justify-content: flex-end;    /* текст внизу */
+  align-items: center;
+  padding: 8px;
   cursor: pointer;
   transition: 0.2s;
 }
@@ -64,6 +66,7 @@ body {
   color: #fff;
   font-family: "Press Start 2P", system-ui, sans-serif;
   text-transform: uppercase;
+  margin-bottom: 6px;          /* немного отступить от края */
 }
 
 /* Кнопка GAME */
