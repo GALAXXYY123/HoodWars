@@ -40,6 +40,7 @@
 
     let isLoading = false;
 
+    // выбор персонажа
     cards.forEach(card => {
       card.addEventListener("click", () => {
         cards.forEach(c => c.classList.remove("active"));
@@ -48,6 +49,7 @@
       });
     });
 
+    // прогресс загрузки
     function startProgress(ms) {
       const start = performance.now();
       const tick = (now) => {
@@ -55,8 +57,9 @@
         const pct = Math.floor(ratio * 100);
         percentEl.textContent = pct + "%";
         barEl.style.width = pct + "%";
-        if (ratio < 1) requestAnimationFrame(tick);
-        else {
+        if (ratio < 1) {
+          requestAnimationFrame(tick);
+        } else {
           percentEl.textContent = "100%";
           barEl.style.width = "100%";
           setTimeout(() => window.location.href = "game.html", 300);
@@ -65,6 +68,7 @@
       requestAnimationFrame(tick);
     }
 
+    // нажатие на GAME
     gameBtn.addEventListener("click", (e) => {
       e.preventDefault();
       if (!gameBtn.classList.contains("active") || isLoading) return;
