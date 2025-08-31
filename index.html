@@ -1,34 +1,44 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ru">
-<head>
-  <meta charset="UTF-8">
-  <title>Menu</title>
-  <link rel="stylesheet" href="styles.css">
-  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-</head>
-<body>
-  <!-- Меню -->
-  <div class="menu-wrapper">
-    <div class="menugrid">
-      <button class="charcard"><div class="charcardname">G. SAM</div></button>
-      <button class="charcard"><div class="charcardname">ДЯДЯ ЖЕНЯ</div></button>
-      <button class="charcard"><div class="charcardname">ГРИША ГОФМАН</div></button>
-      <button class="charcard"><div class="charcardname">POLYANA</div></button>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Меню — Загрузка 0–100 за 25s</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <!-- Твой существующий контент меню -->
+    <header data-hide-on-load>
+      <h1>Выбор персонажа</h1>
+    </header>
+
+    <main id="menu" data-hide-on-load>
+      <!-- Пример сетки (замени на свою) -->
+      <section class="grid">
+        <div class="card">Персонаж 1</div>
+        <div class="card">Персонаж 2</div>
+        <div class="card">Персонаж 3</div>
+        <div class="card">Персонаж 4</div>
+      </section>
+
+      <!-- Важно: у кнопки запуска должен быть этот id -->
+      <button id="btn-game" class="btn primary" type="button">GAME</button>
+    </main>
+
+    <!-- ===== Loading HUD (добавь это БЛИЖЕ к концу body) ===== -->
+    <div id="loading-hud" aria-hidden="true">
+      <div class="loading-box" role="status" aria-live="polite" aria-label="Загрузка">
+        <h2 class="loading-title">Загрузка…</h2>
+        <div class="progress" aria-label="Прогресс загрузки">
+          <div class="progress-bar" id="progress-bar" style="width:0%"></div>
+        </div>
+        <div class="percent" id="loading-percent">0%</div>
+        <div class="hint">Пожалуйста, подождите…</div>
+      </div>
     </div>
-    <a href="game.html" class="btn" id="gameBtn">GAME</a>
-  </div>
+    <!-- ===== /Loading HUD ===== -->
 
-  <script>
-    const cards = document.querySelectorAll(".charcard");
-    const gameBtn = document.getElementById("gameBtn");
-
-    cards.forEach(card => {
-      card.addEventListener("click", () => {
-        cards.forEach(c => c.classList.remove("active"));
-        card.classList.add("active");
-        gameBtn.classList.add("active");
-      });
-    });
-  </script>
-</body>
+    <!-- Скрипт подключаем в самом конце, после разметки HUD -->
+    <script src="./menu.js"></script>
+  </body>
 </html>
