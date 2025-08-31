@@ -9,7 +9,7 @@ body {
   background: url("./assets/backgrounds/menu_bg.png") no-repeat center center fixed;
   background-size: cover;
   display: flex;
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
   font-family: "Press Start 2P", system-ui, sans-serif;
   color: #fff;
@@ -17,20 +17,14 @@ body {
   position: relative;
 }
 
-/* Обёртка меню */
-.menu-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
 /* Сетка карточек */
 .menugrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 6px 4px;
+  gap: 4px; /* ближе друг к другу */
+  margin-top: 70px; /* ниже логотипа */
   width: 65%;
-  max-width: 260px;
+  max-width: 260px; /* компактнее */
 }
 
 /* Карточки */
@@ -50,7 +44,7 @@ body {
 }
 
 .charcard.active {
-  border-color: #FFD700;
+  border-color: #FFD700; /* жёлтая обводка выбранного */
 }
 
 .charcardname {
@@ -72,8 +66,10 @@ body {
   color: white;
   cursor: not-allowed;
   opacity: 0.5;
-  margin-top: 20px;
-  position: relative;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
   text-decoration: none;
   pointer-events: none;
   transition: 0.2s;
@@ -83,8 +79,8 @@ body {
   cursor: pointer;
   opacity: 1;
   pointer-events: auto;
-  border-color: #FFD700;
-  color: #FFD700;
+  border-color: #FFD700;   /* жёлтая обводка */
+  color: #FFD700;          /* текст тоже жёлтый */
 }
 
 .btn.active:hover {
