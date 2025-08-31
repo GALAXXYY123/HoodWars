@@ -14,18 +14,19 @@ body {
   position: relative;
 }
 
-/* Контейнер меню в красной области */
+/* Контейнер под красную область */
 .menu-wrapper {
   position: absolute;
-  top: 30%;           /* подняли выше */
+  top: 25%;          /* поднимаем выше */
   left: 50%;
-  transform: translate(-50%, 0);
-  width: 500px;       /* ширина блока под прямоугольник */
-  height: 400px;      /* высота блока под прямоугольник */
+  transform: translateX(-50%);
+  width: 80%;        /* растянем почти на всю ширину экрана */
+  max-width: 500px;  /* ограничение на больших экранах */
+  height: 50%;       /* высота как у красного прямоугольника */
   display: flex;
   flex-direction: column;
+  justify-content: space-between; /* карточки сверху, кнопка снизу */
   align-items: center;
-  justify-content: center;
 }
 
 /* Сетка карточек */
@@ -33,22 +34,22 @@ body {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 20px;
-  justify-items: center;
-  align-items: center;
   width: 100%;
+  height: auto;
+  justify-items: center;
 }
 
 /* Карточки */
 .charcard {
-  width: 180px;
-  height: 180px;
+  width: 100%;
+  max-width: 200px;
+  aspect-ratio: 1 / 1;   /* всегда квадратные */
   border: 2px solid rgba(255, 255, 255, 0.6);
   border-radius: 6px;
   background: rgba(20, 20, 40, 0.55);
   display: flex;
-  justify-content: flex-end;
-  align-items: center;
-  padding: 8px;
+  justify-content: center;   /* текст по центру */
+  align-items: center;       /* текст по центру */
   cursor: pointer;
   transition: 0.2s;
 }
@@ -59,7 +60,6 @@ body {
 
 .charcardname {
   font-size: 12px;
-  margin-bottom: 8px;
   text-align: center;
   color: #fff;
   font-family: "Press Start 2P", system-ui, sans-serif;
@@ -77,11 +77,9 @@ body {
   color: white;
   cursor: not-allowed;
   opacity: 0.5;
-  margin-top: 30px;
   text-decoration: none;
   pointer-events: none;
   transition: 0.2s;
-  align-self: center;
 }
 
 .btn.active {
