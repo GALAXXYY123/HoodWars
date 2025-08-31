@@ -1,67 +1,76 @@
 /* styles.css */
-body {
+html, body {
   margin: 0;
-  height: 100vh;
-  width: 100vw;
-  background: url("./assets/backgrounds/menu_bg.png") no-repeat center center fixed;
-  background-size: cover;
-  aspect-ratio: 9 / 16;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  font-family: "Press Start 2P", system-ui, sans-serif;
-  color: #fff;
-  overflow: hidden;
-}
-
-.menu {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  padding: 0;
+  width: 100%;
   height: 100%;
 }
 
-.menugrid {
-  display: grid;
-  grid-template-columns: repeat(2, auto);
-  gap: 16px;
-  justify-content: center;
-  margin-top: 40px;
-}
-
-.charcard {
-  width: 96px;
-  height: 96px;
-  border: none;
-  background: transparent;
+body {
+  background: url("./assets/backgrounds/menu_bg.png") no-repeat center center fixed;
+  background-size: cover; /* адаптация фона */
   display: flex;
   flex-direction: column;
   align-items: center;
+  font-family: "Press Start 2P", system-ui, sans-serif;
+  color: #fff;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Сетка карточек */
+.menugrid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin-top: 120px; /* чтобы карточки были под "HOOD WARS" */
+  width: 90%;
+  max-width: 400px;
+}
+
+/* Карточки */
+.charcard {
+  width: 140px;
+  height: 140px;
+  border: 2px solid rgba(255, 255, 255, 0.6);
+  border-radius: 8px;
+  background: rgba(20, 20, 40, 0.6);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 8px;
   cursor: pointer;
 }
 
-.charcardimg {
-  width: 64px;
-  height: 64px;
-  object-fit: contain;
+.charcard:hover {
+  border-color: #FFD700;
 }
 
 .charcardname {
   font-size: 10px;
-  line-height: 12px;
-  text-align: center;
   margin-top: 4px;
+  text-align: center;
+  color: #fff;
 }
 
-.menufooter {
-  display: flex;
-  justify-content: center;
-  padding: 16px;
-}
-
+/* Кнопка GAME */
 .btn {
   font-family: "Press Start 2P", system-ui, sans-serif;
-  font-size: 12px;
-  padding: 8px 16px;
+  font-size: 14px;
+  padding: 12px 24px;
+  border: 2px solid white;
+  border-radius: 8px;
+  background: transparent;
+  color: white;
   cursor: pointer;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.btn:hover {
+  background: white;
+  color: black;
 }
