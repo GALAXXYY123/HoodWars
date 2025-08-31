@@ -2,10 +2,16 @@
 body {
   margin: 0;
   height: 100vh;
-  background: url("assets/backgrounds/menu_bg.png") no-repeat center center fixed;
+  width: 100vw;
+  background: url("./assets/backgrounds/menu_bg.png") no-repeat center center fixed;
   background-size: cover;
+  aspect-ratio: 9 / 16;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   font-family: "Press Start 2P", system-ui, sans-serif;
   color: #fff;
+  overflow: hidden;
 }
 
 .menu {
