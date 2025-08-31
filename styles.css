@@ -9,7 +9,7 @@ body {
   background: url("./assets/backgrounds/menu_bg.png") no-repeat center center fixed;
   background-size: cover;
   display: flex;
-  flex-direction: column;
+  justify-content: center;
   align-items: center;
   font-family: "Press Start 2P", system-ui, sans-serif;
   color: #fff;
@@ -17,14 +17,20 @@ body {
   position: relative;
 }
 
+/* Обёртка меню */
+.menu-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 /* Сетка карточек */
 .menugrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 4px; /* ближе друг к другу */
-  margin-top: 70px; /* ниже логотипа */
+  gap: 6px 4px;
   width: 65%;
-  max-width: 260px; /* компактнее */
+  max-width: 260px;
 }
 
 /* Карточки */
@@ -44,7 +50,7 @@ body {
 }
 
 .charcard.active {
-  border-color: #FFD700; /* жёлтая обводка выбранного */
+  border-color: #FFD700;
 }
 
 .charcardname {
@@ -66,7 +72,7 @@ body {
   color: white;
   cursor: not-allowed;
   opacity: 0.5;
-  margin-top: 20px;      /* отступ от карточек */
+  margin-top: 20px;
   position: relative;
   text-decoration: none;
   pointer-events: none;
