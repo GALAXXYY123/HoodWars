@@ -1,45 +1,37 @@
+<!-- index.html -->
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Beat'em up 16-bit</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <!-- Подключаем пиксельный шрифт -->
+  <title>Character Select</title>
+  <link href="styles.css?v=3" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-  <link href="styles.css" rel="stylesheet">
 </head>
 <body>
-  <div id="app" class="app">
-    <div class="menu">
-      <!-- фон -->
-      <img src="assets/backgrounds/menu_bg.png" alt="" class="menubg">
+  <main class="menu">
+    <section class="menugrid">
+      <button class="charcard" aria-pressed="false">
+        <img src="https://via.placeholder.com/32" alt="Hero" class="charcardimg">
+        <div class="charcardname">HERO</div>
+      </button>
+      <button class="charcard" aria-pressed="false">
+        <img src="https://via.placeholder.com/32" alt="Mage" class="charcardimg">
+        <div class="charcardname">MAGE</div>
+      </button>
+      <button class="charcard" aria-pressed="false">
+        <img src="https://via.placeholder.com/32" alt="Rogue" class="charcardimg">
+        <div class="charcardname">ROGUE</div>
+      </button>
+      <button class="charcard" aria-pressed="false">
+        <img src="https://via.placeholder.com/32" alt="Knight" class="charcardimg">
+        <div class="charcardname">KNIGHT</div>
+      </button>
+    </section>
 
-      <!-- грид персонажей -->
-      <div class="menugrid">
-        <button class="charcard" data-id="gsam" aria-pressed="false">
-          <img src="chars/gsam.png" alt="" class="charcardimg">
-          <span class="charcardname">G.SAM</span>
-        </button>
-        <button class="charcard" data-id="dyadyajenya" aria-pressed="false">
-          <img src="chars/dyadya.png" alt="" class="charcardimg">
-          <span class="charcardname">ДЯДЯ ЖЕНЯ</span>
-        </button>
-        <button class="charcard" data-id="gofman" aria-pressed="false">
-          <img src="chars/gofman.png" alt="" class="charcardimg">
-          <span class="charcardname">Гриша Гофман</span>
-        </button>
-        <button class="charcard" data-id="polyana" aria-pressed="false">
-          <img src="chars/polyana.png" alt="" class="charcardimg">
-          <span class="charcardname">Polyana</span>
-        </button>
-      </div>
-
-      <!-- футер -->
-      <div class="menufooter">
-        <button id="gameBtn" class="btn btndisabled" disabled>GAME</button>
-      </div>
-    </div>
-  </div>
+    <footer class="menufooter">
+      <button id="gameBtn" class="btn">GAME</button>
+    </footer>
+  </main>
 
   <script src="main.js"></script>
 </body>
