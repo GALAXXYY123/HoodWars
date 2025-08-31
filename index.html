@@ -1,44 +1,183 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ru">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Меню — Загрузка 0–100 за 25s</title>
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body>
-    <!-- Твой существующий контент меню -->
-    <header data-hide-on-load>
-      <h1>Выбор персонажа</h1>
-    </header>
+<head>
+  <meta charset="UTF-8" />
+  <title>Menu</title>
+  <link rel="stylesheet" href="styles.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Press Start 2P', monospace;
+      background: url('assets/backgrounds/menu_bg.png') center/cover fixed no-repeat;
+      color: #fff;
+      min-height: 100vh;
+    }
 
-    <main id="menu" data-hide-on-load>
-      <!-- Пример сетки (замени на свою) -->
-      <section class="grid">
-        <div class="card">Персонаж 1</div>
-        <div class="card">Персонаж 2</div>
-        <div class="card">Персонаж 3</div>
-        <div class="card">Персонаж 4</div>
-      </section>
+    .menu-wrapper {
+      display: grid;
+      place-items: center;
+      gap: 24px;
+      padding: 32px;
+      z-index: 1;  /* Перекрываем на время загрузки */
+    }
 
-      <!-- Важно: у кнопки запуска должен быть этот id -->
-      <button id="btn-game" class="btn primary" type="button">GAME</button>
-    </main>
+    .menugrid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(180px, 1fr));
+      gap: 16px;
+    }
 
-    <!-- ===== Loading HUD (добавь это БЛИЖЕ к концу body) ===== -->
-    <div id="loading-hud" aria-hidden="true">
-      <div class="loading-box" role="status" aria-live="polite" aria-label="Загрузка">
-        <h2 class="loading-title">Загрузка…</h2>
-        <div class="progress" aria-label="Прогресс загрузки">
-          <div class="progress-bar" id="progress-bar" style="width:0%"></div>
-        </div>
-        <div class="percent" id="loading-percent">0%</div>
-        <div class="hint">Пожалуйста, подождите…</div>
-      </div>
+    .charcard {
+      background: rgba(0,0,0,0.35);
+      border: 2px solid rgba(255,255,255,0.6);
+      color: #fff;
+      padding: 16px 12px;
+      cursor: pointer;
+      text-align: center;
+      transition: transform .08s ease, border-color .2s;
+    }
+    .charcard:hover { transform: translateY(-2px); }
+    .charcard.active { border-color: #00ff66; }
+
+    .charcardname { pointer-events: none; }
+
+    .btn {
+      padding: 14px 28px;
+      font-size: 16px;
+      background: #00ff66;
+      border: 0;
+      color: #000;
+      cursor: pointer;
+      transition: transform .08s ease, filter .2s ease;
+    }
+    .btn:hover { filter: brightness(0.9); }
+    .btn:disabled { filter: grayscale(0.8); cursor: default; }
+
+    /* HUD загрузки */
+    #loading-hud {
+      position: fixed;
+      inset: 0;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      background: transparent; /* Прозрачный фон, чтобы фон был виден */
+      z-index: 999;
+      pointer-events: none; /* Для защиты от кликов */
+    }
+    #loading-hud.visible { display: flex; }
+
+    .loading-box {
+      pointer-events: auto;
+      background: rgba(0,0,0,0.38); /* Полупрозрачный фон */
+      backdrop-filter: blur(2px);
+      border: 2px solid #00ff66;
+      color: #00ff66;
+      padding: 20px 24px;
+      min-width: 320px;
+      display: grid;
+      gap: 12px;
+      text-align: center;
+      box-shadow: 0 0 24px rgba(0,255,102,0.25);
+    }
+
+    .loading-title { margin: 0; font-size: 16px; letter-spacing: .5px; }
+
+    .progress {
+      width: 100%;
+      height: 16px;
+      border: 2px solid #00ff66;
+      background: rgba(0,0,0,0.25);
+      overflow: hidden;
+    }
+
+    .progress-bar {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg,#00ff66,#9cffac);
+    }
+
+    .percent { font-size: 14px; color: #eafff1; }
+  </style>
+</head>
+<body>
+  <!-- Меню -->
+  <div class="menu-wrapper" id="menu-wrapper">
+    <div class="menugrid">
+      <button class="charcard"><div class="charcardname">G. SAM</div></button>
+      <button class="charcard"><div class="charcardname">ДЯДЯ ЖЕНЯ</div></button>
+      <button class="charcard"><div class="charcardname">ГРИША ГОФМАН</div></button>
+      <button class="charcard"><div class="charcardname">POLYANA</div></button>
     </div>
-    <!-- ===== /Loading HUD ===== -->
+    <a href="#" class="btn" id="gameBtn">GAME</a>
+  </div>
 
-    <!-- Скрипт подключаем в самом конце, после разметки HUD -->
-    <script src="./menu.js"></script>
-  </body>
+  <!-- HUD загрузки -->
+  <div id="loading-hud" aria-hidden="true">
+    <div class="loading-box" role="status" aria-live="polite" aria-label="Загрузка">
+      <h2 class="loading-title">ДВИГАЕМ НА РАЙОН…</h2>
+      <div class="progress" aria-label="Прогресс загрузки">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+      <div class="percent" id="loading-percent">0%</div>
+    </div>
+  </div>
+
+  <script>
+    const cards = document.querySelectorAll(".charcard");
+    const gameBtn = document.getElementById("gameBtn");
+    const menuWrapper = document.getElementById("menu-wrapper");
+    const hud = document.getElementById("loading-hud");
+    const percentEl = document.getElementById("loading-percent");
+    const barEl = document.getElementById("progress-bar");
+    const DURATION_MS = 1000;  // 1 секунда для загрузки
+
+    let isLoading = false;
+
+    // Логика выбора карточки
+    cards.forEach(card => {
+      card.addEventListener("click", () => {
+        cards.forEach(c => c.classList.remove("active"));
+        card.classList.add("active");
+        gameBtn.classList.add("active");
+      });
+    });
+
+    // Логика загрузки
+    function startProgress(ms) {
+      const start = performance.now();
+      const tick = (now) => {
+        const ratio = Math.min(1, (now - start) / ms);
+        const pct = Math.floor(ratio * 100);
+        percentEl.textContent = pct + "%";
+        barEl.style.width = pct + "%";
+        if (ratio < 1) requestAnimationFrame(tick);
+        else {
+          percentEl.textContent = "100%";
+          barEl.style.width = "100%";
+          setTimeout(() => {
+            window.location.href = "game.html";  // Редирект на game.html после загрузки
+          }, 300);  // Немного задерживаем, чтобы завершить анимацию
+        }
+      };
+      requestAnimationFrame(tick);
+    }
+
+    // Обработчик клика по кнопке GAME
+    gameBtn.addEventListener("click", () => {
+      if (isLoading) return; // Защита от повторных кликов
+      isLoading = true;
+
+      // Скрыть меню
+      menuWrapper.style.display = "none";
+
+      // Показать HUD
+      hud.classList.add("visible");
+      hud.setAttribute("aria-hidden", "false");
+
+      // Начать прогресс
+      startProgress(DURATION_MS);
+    });
+  </script>
+</body>
 </html>
