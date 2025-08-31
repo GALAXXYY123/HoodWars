@@ -1,60 +1,13 @@
-(() => {
-  function init() {
-    const cards = Array.from(document.querySelectorAll('.charcard'));
-    const gameBtn = document.getElementById('gameBtn');
-    if (!cards.length || !gameBtn) return;
+// main.js
+document.addEventListener("DOMContentLoaded", () => {
+  const cards = document.querySelectorAll(".charcard");
+  const gameBtn = document.getElementById("gameBtn");
 
-    let selectedId = null;
-
-    function updateButton() {
-      const enabled = !!selectedId;
-      gameBtn.disabled = !enabled;
-      gameBtn.classList.toggle('btndisabled', !enabled);
-      gameBtn.classList.toggle('active', enabled); // жёлтая подсветка
-    }
-
-    function select(btn, persist) {
-      cards.forEach(b => b.setAttribute('aria-pressed', 'false'));
-      btn.setAttribute('aria-pressed', 'true');
-      selectedId = btn.dataset.id || null;
-      if (persist && selectedId) {
-        try { localStorage.setItem('selectedCharacter', selectedId); } catch {}
-      }
-      updateButton();
-    }
-
-    try {
-      const saved = localStorage.getItem('selectedCharacter');
-      if (saved) {
-        const btn = cards.find(b => b.dataset.id === saved);
-        if (btn) select(btn, false);
-      }
-    } catch {}
-    updateButton();
-
-    cards.forEach(btn => {
-      btn.addEventListener('click', () => select(btn, true));
+  cards.forEach(card => {
+    card.addEventListener("click", () => {
+      cards.forEach(c => c.setAttribute("aria-pressed", "false"));
+      card.setAttribute("aria-pressed", "true");
+      gameBtn.classList.add("active");
     });
-
-    gameBtn.addEventListener('click', () => {
-      if (!selectedId) return;
-      alert(`Стартуем с персонажем: ${labelById(selectedId)}`);
-    });
-
-    function labelById(id) {
-      switch (id) {
-        case 'gsam': return 'G.SAM';
-        case 'dyadyajenya': return 'ДЯДЯ ЖЕНЯ';
-        case 'gofman': return 'Гриша Гофман';
-        case 'polyana': return 'Polyana';
-        default: return id;
-      }
-    }
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init, { once: true });
-  } else {
-    init();
-  }
-})();
+  });
+});
