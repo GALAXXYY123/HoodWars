@@ -8,7 +8,7 @@ html, body {
 
 body {
   background: url("./assets/backgrounds/menu_bg.png") no-repeat center center fixed;
-  background-size: cover; /* адаптация фона */
+  background-size: cover;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -22,25 +22,26 @@ body {
 .menugrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-  margin-top: 120px; /* чтобы карточки были под "HOOD WARS" */
-  width: 90%;
-  max-width: 400px;
+  gap: 8px; /* сделали ближе друг к другу */
+  margin-top: 100px; /* ниже логотипа */
+  width: 80%;
+  max-width: 320px; /* компактнее */
 }
 
 /* Карточки */
 .charcard {
-  width: 140px;
-  height: 140px;
-  border: 2px solid rgba(255, 255, 255, 0.6);
-  border-radius: 8px;
-  background: rgba(20, 20, 40, 0.6);
+  width: 120px;
+  height: 120px;
+  border: 2px solid rgba(255, 255, 255, 0.7);
+  border-radius: 6px;
+  background: rgba(20, 20, 40, 0.55);
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
   align-items: center;
-  padding: 8px;
+  padding: 6px;
   cursor: pointer;
+  transition: 0.2s;
 }
 
 .charcard:hover {
@@ -48,10 +49,11 @@ body {
 }
 
 .charcardname {
-  font-size: 10px;
+  font-size: 9px; /* мелкий пиксельный стиль */
   margin-top: 4px;
   text-align: center;
   color: #fff;
+  font-family: "Press Start 2P", system-ui, sans-serif; /* 16-бит стиль */
 }
 
 /* Кнопка GAME */
